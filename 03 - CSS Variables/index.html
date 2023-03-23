@@ -47,7 +47,7 @@
   <script>
   
   document.addEventListener('mousedown', function(e){
-    try{
+    if(e.toElement.localName==="input"){
     const node=document.querySelector(`#${e.srcElement.id}`)
     node.addEventListener("change",getValue)
     node.addEventListener("mousemove",getValue)
@@ -61,7 +61,7 @@
     const rootNode=document.querySelector(":root");
     properties.forEach((e)=>rootNode.style.setProperty(`${e.key}`,`${e.suffix}`))
     properties.forEach((e)=>{if(e.style=="padding"||e.style=="background"){ image.style.setProperty(`${e.style}`,`var(${e.key})`)}else{image.style.setProperty(`${e.style}`,`blur(var(${e.key}))`)}})
-    };}catch{}
+    };}else{return}
   });
 
   </script>
