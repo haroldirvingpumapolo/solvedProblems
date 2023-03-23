@@ -59,19 +59,17 @@
 
 <script>
   document.addEventListener('keydown', function(e){
-  try{
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
     const nodeAudio = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!document.querySelector(`audio[data-key="${e.keyCode}"]`)) return;
     audio.play();
     audio.currentTime = 0;
     nodeAudio.setAttribute("class","key playing")
-  }catch{}
   })
   document.addEventListener('keyup',function(e){
-    try{
     const nodeAudio = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!document.querySelector(`div[data-key="${e.keyCode}"]`)) return;
     nodeAudio.setAttribute("class","key")
-  }catch{}
   })
 </script>
 
