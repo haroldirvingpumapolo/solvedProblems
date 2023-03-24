@@ -51,7 +51,7 @@
       font-family: 'helvetica neue', sans-serif;
       font-weight: 100;
       font-size: 50px;
-    }
+    } 
 
     .controls {
       margin-bottom: 50px;
@@ -63,21 +63,26 @@
   </style>
 
   <script>
-    document.addEventListener("mousedown", function (e) {
-      const node = document.querySelector(`input[id="${e.srcElement.id}"]`);
-      if (!document.querySelector(`input[id="${e.srcElement.id}"]`)) return;
-      node.addEventListener("change", funcUpdater);
-      node.addEventListener("mousemove", funcUpdater);
+      const inputsAll=document.querySelectorAll("input")
+      const InputsAllArr=[...inputsAll]
+      const arrNodesIds=[]
+      InputsAllArr.map((e)=>arrNodesIds.push(e.id))
+      //realice estos 4 lias de codigos suponiendo si tubiera demaciados inputs que capturar
+      arrNodesIds.map((e)=>{
+        const nodesInputs=document.querySelector(`#${e}`);
+        nodesInputs.addEventListener("change", funcUpdater);
+        nodesInputs.addEventListener("mousemove", funcUpdater);
+      })
       function funcUpdater() {
         const root = document.querySelector(`:root`)
         const properties = [
-          { key: "--base", suffix: `${document.querySelector("#base").value}` },
-          { key: "--spacing", suffix: `${document.querySelector("#spacing").value}px` },
-          { key: "--blur", suffix: `${document.querySelector("#blur").value}px` }
+          { key: "--base", value: `${document.querySelector("#base").value}` },
+          { key: "--spacing", value: `${document.querySelector("#spacing").value}px` },
+          { key: "--blur", value: `${document.querySelector("#blur").value}px` }
         ];
-        properties.forEach((e) => root.style.setProperty(`${e.key}`, `${e.suffix}`))
+        properties.forEach((e) => root.style.setProperty(`${e.key}`, `${e.value}`));
       }
-    })
+    
   </script>
 
 </body>

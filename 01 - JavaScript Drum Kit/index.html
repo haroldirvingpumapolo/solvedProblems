@@ -61,14 +61,14 @@
   document.addEventListener('keydown', function(e){
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
     const nodeAudio = document.querySelector(`div[data-key="${e.keyCode}"]`);
-    if (!document.querySelector(`audio[data-key="${e.keyCode}"]`)) return;
+    if (!audio && !nodeAudio) return;
     audio.play();
     audio.currentTime = 0;
     nodeAudio.setAttribute("class","key playing")
   })
   document.addEventListener('keyup',function(e){
     const nodeAudio = document.querySelector(`div[data-key="${e.keyCode}"]`);
-    if (!document.querySelector(`div[data-key="${e.keyCode}"]`)) return;
+    if (!nodeAudio) return;
     nodeAudio.setAttribute("class","key")
   })
 </script>
