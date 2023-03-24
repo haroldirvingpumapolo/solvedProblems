@@ -45,7 +45,7 @@
     const inventorsCopy=structuredClone(JSON.parse(JSON.stringify(inventors)));
     //JSON.parse(JSON.stringify(inventors))/*es para crear una copia de UN ARREGLO DE profunda sin ninguna referencia de la original*/
     //sstructuredClone(inventors)/*es para crear una copia DE UN OBJETO profunda sin ninguna referencia de la original*/
-    inventorsCopy.map((e)=>e.lived=e.passed-e.year);   
+    inventorsCopy.forEach((e)=>e.lived=e.passed-e.year);   
     console.log(inventorsCopy.sort((a,b)=>b.lived-a.lived));
     // ---
 
@@ -87,7 +87,7 @@
     const dataDuplicateNoRepit = new Set(data);
     //convierto de tipo set a array
     const arrDataDuplicateNoRepit = Array.from(dataDuplicateNoRepit);
-    arrDataDuplicateNoRepit.map((e) => {
+    arrDataDuplicateNoRepit.forEach((e) => {
     const carArr = data.filter(a => a === e);
     console.log(`${e}: ${carArr.length}`);
     });

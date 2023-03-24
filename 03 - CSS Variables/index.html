@@ -51,7 +51,7 @@
       font-family: 'helvetica neue', sans-serif;
       font-weight: 100;
       font-size: 50px;
-    } 
+    }
 
     .controls {
       margin-bottom: 50px;
@@ -63,24 +63,24 @@
   </style>
 
   <script>
-      const inputsAll=document.querySelectorAll("input")
-      const arrNodesIds = Array.from(inputsAll).map((input)=>input.id)    
-      //realice estos 4 lias de codigos suponiendo si tubiera demaciados inputs que capturar
-      arrNodesIds.forEach((e)=>{
-        const nodesInputs=document.querySelector(`#${e}`);
-        nodesInputs.addEventListener("change", funcUpdater);
-        nodesInputs.addEventListener("mousemove", funcUpdater);
-      })
-      function funcUpdater() {
-        const root = document.querySelector(`:root`)
-        const properties = [
-          { key: "--base", value: `${document.querySelector("#base").value}` },
-          { key: "--spacing", value: `${document.querySelector("#spacing").value}px` },
-          { key: "--blur", value: `${document.querySelector("#blur").value}px` }
-        ];
-        properties.forEach((e) => root.style.setProperty(`${e.key}`, `${e.value}`));
-      }
-    
+    const root = document.querySelector(':root');
+    const inputsAll = document.querySelectorAll('input');
+    inputsAll.forEach(input => {
+      input.addEventListener('change', funcUpdater);
+      input.addEventListener('mousemove', funcUpdater);
+    });
+    function funcUpdater() {
+      const ArrDatasInputs = Array.from(inputsAll).map(input => {
+        return {
+          key: `--${input.id}`,
+          dataType: input.dataset.sizing || '',
+          value: input.value
+        }
+      });
+      ArrDatasInputs.forEach((dataNode) =>
+        root.style.setProperty(dataNode.key, `${dataNode.value}${dataNode.dataType}`)
+      );
+    }
   </script>
 
 </body>
