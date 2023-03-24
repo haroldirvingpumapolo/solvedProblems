@@ -64,11 +64,10 @@
 
   <script>
       const inputsAll=document.querySelectorAll("input")
-      const InputsAllArr=[...inputsAll]
-      const arrNodesIds=[]
-      InputsAllArr.map((e)=>arrNodesIds.push(e.id))
+      const arrNodesIds = Array.from(inputsAll).map((input)=>input.id)    
+      console.log(arrNodesIds)
       //realice estos 4 lias de codigos suponiendo si tubiera demaciados inputs que capturar
-      arrNodesIds.map((e)=>{
+      arrNodesIds.forEach((e)=>{
         const nodesInputs=document.querySelector(`#${e}`);
         nodesInputs.addEventListener("change", funcUpdater);
         nodesInputs.addEventListener("mousemove", funcUpdater);
