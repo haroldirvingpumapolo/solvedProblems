@@ -20,14 +20,14 @@
 
 
   <script>
-    const unorderedList = document.querySelector('.suggestions');
+const unorderedList = document.querySelector('.suggestions');
     document.querySelector('input').addEventListener('keyup', function () {
       const inputValue = document.querySelector('input').value.toLowerCase();
       fetch(`https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json`)
         .then((res) => res.json())
         .then((response) => {
           const arrSearch = response.filter(({ city, state }) => {
-            return (city.toLowerCase()||state.toLowerCase()).includes(inputValue)
+          return city.toLowerCase().includes(inputValue)||state.toLowerCase().includes(inputValue);
           });
           unorderedList.innerHTML = '';
           arrSearch.forEach(({ city, state, population }) => {
@@ -40,7 +40,6 @@
           });
         })
     })
-
   </script>
 </body>
 
