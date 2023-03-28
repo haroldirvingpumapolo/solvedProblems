@@ -20,10 +20,9 @@
 
 
   <script>
-    const inputValue = document.querySelector('input').value.toLowerCase()
     const unorderedList = document.querySelector('.suggestions');
-
     document.querySelector('input').addEventListener('keyup', function () {
+      const inputValue = document.querySelector('input').value.toLowerCase();
       fetch(`https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json`)
         .then((res) => res.json())
         .then((response) => {
@@ -32,7 +31,7 @@
           });
           unorderedList.innerHTML = '';
           arrSearch.forEach(({ city, state, population }) => {
-            const highlightAngeles = `Los <span class="hl">${inputValue}</span>`
+            const highlight = `<span class="hl">${inputValue}</span>`
             unorderedList.innerHTML +=
               `<li>
                 <span class="name">${city.replace(new RegExp(inputValue, 'gi'), highlight)}, ${state.replace(new RegExp(inputValue, 'gi'), highlight)}</span>
