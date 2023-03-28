@@ -27,8 +27,9 @@
         .then((res) => res.json())
         .then((response) => {
           const arrSearch = response.filter(({ city, state }) => {
-            return (city && state).toLowerCase().includes(inputValue)
+            return (city.toLowerCase()||state.toLowerCase()).includes(inputValue)
           });
+          console.log(arrSearch)
           unorderedList.innerHTML = '';
           arrSearch.forEach(({ city, state, population }) => {
             const highlight = `<span class="hl">${inputValue}</span>`
