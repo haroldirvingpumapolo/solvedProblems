@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://fav.farm/✅" />
+</head>
+
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+
+
+  <script>
+    const unorderedList = document.querySelector('.suggestions');
+    let arrCitysAll=[]
+    fetch(`https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json`)
+      .then((res) => res.json())
+      .then((response) => {
+        arrCitysAll=response
+      })
+    document.querySelector('input').addEventListener('keyup', function (e) {
+      if (e.keyCode>64 &&e.keyCode<91) {
+        const inputValue = document.querySelector('input').value.toLowerCase();
+          const arrSearch = arrCitysAll.filter(({ city, state }) => {
+            return city.toLowerCase().includes(inputValue) || state.toLowerCase().includes(inputValue);
+          });
+          unorderedList.innerHTML = '';
+          arrSearch.forEach(({ city, state, population }) => {
+            const highlight = `<span class="hl">${inputValue}</span>`
+            unorderedList.innerHTML +=
+              `<li>
+                <span class="name">${city.replace(new RegExp(inputValue, 'gi'), highlight)}, ${state.replace(new RegExp(inputValue, 'gi'), highlight)}</span>
+                <span class="population">${population}</span>
+              </li>`
+          });
+      }
+    })
+
+  </script>
+</body>
+
+</html>
