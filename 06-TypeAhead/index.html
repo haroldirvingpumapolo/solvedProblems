@@ -26,26 +26,22 @@
       .then((response) => {
         arrCitysAllFromApi = response
       })
+    const unorderedList = document.querySelector('.suggestions');
     document.querySelector('input').addEventListener('keyup', function (e) {
-      const unorderedList = document.querySelector('.suggestions');
-      if (e.keyCode > 64 && e.keyCode < 91) {
-        const inputValue = document.querySelector('input').value.toLowerCase();
-        const arrCitysAll = arrCitysAllFromApi.filter(({ city, state }) => {
-          return city.toLowerCase().includes(inputValue) || state.toLowerCase().includes(inputValue);
-        });
-        let arrSearchShow = [];
-        arrCitysAll.forEach(({ city, state, population }) => {
-          const highlight = `<span class="hl">${inputValue}</span>`
-          arrSearchShow+=
-            `<li>
+      const inputValue = e.currentTarget.value.toLowerCase();
+      const arrCitysAll = arrCitysAllFromApi.filter(({ city, state }) => {
+        return city.toLowerCase().includes(inputValue) || state.toLowerCase().includes(inputValue);
+      });
+      let arrSearchShow = '';
+      arrCitysAll.forEach(({ city, state, population }) => {
+        const highlight = `<span class="hl">${inputValue}</span>`
+        arrSearchShow +=
+          `<li>
               <span class="name">${city.replace(new RegExp(inputValue, 'gi'), highlight)} ${state.replace(new RegExp(inputValue, 'gi'), highlight)}</span>
               <span class="population">${population}</span>
             </li>`
-
-        });
-        unorderedList.innerHTML = '';
-        unorderedList.innerHTML = arrSearchShow
-      }
+      });
+      unorderedList.innerHTML = arrSearchShow
     })
 
   </script>
